@@ -1,0 +1,225 @@
+fileFormatVersion: 2
+guid: df340ee98e56ff443b828c66d4d715bf
+timeCreated: 1437163721
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: 8bit_gun
+    100002: 8bit_micky
+    100004: //RootNode
+    100006: Bone001
+    100008: Bone002
+    100010: Bone003
+    100012: Bone004
+    100014: Bone006
+    100016: Bone007
+    100018: Bone009
+    100020: Bone010
+    100022: Bone012
+    100024: Bone013
+    100026: Bone015
+    100028: Bone016
+    100030: Bone017
+    400000: 8bit_gun
+    400002: //RootNode
+    400004: 8bit_micky
+    400006: Bone001
+    400008: Bone002
+    400010: Bone003
+    400012: Bone004
+    400014: Bone006
+    400016: Bone007
+    400018: Bone009
+    400020: Bone010
+    400022: Bone012
+    400024: Bone013
+    400026: Bone015
+    400028: Bone016
+    400030: Bone017
+    2300000: 8bit_gun
+    3300000: 8bit_gun
+    4300000: 8bit_micky
+    4300002: 8bit_gun
+    7400000: Walk
+    7400002: Idle
+    9500000: //RootNode
+    13700000: 8bit_micky
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Walk
+      takeName: Take 001
+      firstFrame: 5
+      lastFrame: 14
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: 8bit_micky
+        weight: 1
+      - path: Bone001
+        weight: 1
+      - path: Bone001/Bone002
+        weight: 1
+      - path: Bone001/Bone002/Bone003
+        weight: 1
+      - path: Bone001/Bone002/Bone003/Bone004
+        weight: 1
+      - path: Bone001/Bone002/Bone006
+        weight: 1
+      - path: Bone001/Bone002/Bone006/Bone007
+        weight: 1
+      - path: Bone001/Bone009
+        weight: 1
+      - path: Bone001/Bone009/Bone010
+        weight: 1
+      - path: Bone001/Bone012
+        weight: 1
+      - path: Bone001/Bone012/Bone013
+        weight: 1
+      - path: Bone001/Bone012/Bone013/Bone017
+        weight: 1
+      - path: Bone001/Bone012/Bone013/Bone017/8bit_gun
+        weight: 1
+      - path: Bone001/Bone015
+        weight: 1
+      - path: Bone001/Bone015/Bone016
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Idle
+      takeName: Take 001
+      firstFrame: 7
+      lastFrame: 7
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: 8bit_micky
+        weight: 1
+      - path: Bone001
+        weight: 1
+      - path: Bone001/Bone002
+        weight: 1
+      - path: Bone001/Bone002/Bone003
+        weight: 1
+      - path: Bone001/Bone002/Bone003/Bone004
+        weight: 1
+      - path: Bone001/Bone002/Bone006
+        weight: 1
+      - path: Bone001/Bone002/Bone006/Bone007
+        weight: 1
+      - path: Bone001/Bone009
+        weight: 1
+      - path: Bone001/Bone009/Bone010
+        weight: 1
+      - path: Bone001/Bone012
+        weight: 1
+      - path: Bone001/Bone012/Bone013
+        weight: 1
+      - path: Bone001/Bone012/Bone013/Bone017
+        weight: 1
+      - path: Bone001/Bone012/Bone013/Bone017/8bit_gun
+        weight: 1
+      - path: Bone001/Bone015
+        weight: 1
+      - path: Bone001/Bone015/Bone016
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -55,22 +55,32 @@ public class ModernCharacter : MonoBehaviour {
 	Controller controller = new Controller();
 
 	[SerializeField]
+	Projectile projectile;
+
+	[SerializeField]
 	float movementSpeed;
 
 	[SerializeField]
 	Camera cam;
+
+	Vector3 aim;
 
 
 	void Update() {
 		controller.SetCurrentState( GamePad.GetState( PlayerIndex.One ) );
 
 		var velocity = controller.leftStick * movementSpeed;
-		var aim = controller.rightStick;
+		var currentAim = new Vector3(controller.rightStick.x, 0f, controller.rightStick.y).normalized;
 
 		transform.position += new Vector3(velocity.x, 0f, velocity.y) * Time.deltaTime;
 		cam.transform.position = transform.position + Vector3.up * 10f;
-		if( aim != Vector2.zero ) {
-			transform.forward = new Vector3(aim.y, 0f, -aim.x).normalized;
+		if( currentAim != Vector3.zero ) {
+			transform.forward = new Vector3(currentAim.y, 0f, -currentAim.x);
+			aim = currentAim;
+		}
+
+		if( controller.a.down ) {
+			ProjectileSystem.ShootProjectile( projectile, transform.position, aim );
 		}
 	}
 }
