@@ -5,15 +5,27 @@ public class RetroCharacter : MonoBehaviour {
 
 	public bool enableDebugging = false;
 
-	const float linearSpeed  = 5f;
-	const float angularSpeed = 80f;
+	const float linearSpeed  = 7.5f;
+	const float angularSpeed = 120f;
 
 	string rotationAxis;
 	string movementAxis;
+	Vector3 moveDirection = new Vector3(0f, 0f, -1f);
 
 	// Use this for initialization
 	void Start () {
 		selectJoystick();
+	}
+
+	// Update is called once per frame
+	void Update () {
+		var speed = linearSpeed * Input.GetAxis(movementAxis);
+
+		transform.Rotate(new Vector3(
+			0f, angularSpeed * Time.deltaTime * Input.GetAxis(rotationAxis), 0f));
+		transform.Translate(moveDirection * speed * Time.deltaTime);
+
+		GetComponent<Animator>().SetFloat("Speed", Mathf.Abs(speed));
 	}
 
 	void selectJoystick() {
@@ -26,14 +38,6 @@ public class RetroCharacter : MonoBehaviour {
 		rotationAxis = "Joy" + (j+1).ToString() + "Axis0";
 		movementAxis = "Joy" + (j+1).ToString() + "Axis1";
 		Debug.Log("Using joystick " + (j+1).ToString() + ", \"" + names[j] + "\", for Retro character.");
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		transform.Rotate(new Vector3(
-			0f, angularSpeed * Time.deltaTime * Input.GetAxis(rotationAxis), 0f));
-		transform.Translate(new Vector3(
-			linearSpeed * Time.deltaTime * Input.GetAxis(movementAxis), 0f, 0f));
 	}
 
 	void OnGUI () {
