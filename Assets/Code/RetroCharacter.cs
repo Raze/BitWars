@@ -53,7 +53,7 @@ public class RetroCharacter : MonoBehaviour {
 				transform.position = jumpFunction.UpdateStep();
 			}
 		} else {
-			characterController.SimpleMove(moveDirection * speed);
+			characterController.SimpleMove(transform.TransformVector( moveDirection * speed ));
 
 			GetComponent<Animator>().SetFloat("Speed", Mathf.Abs(speed));
 		}
