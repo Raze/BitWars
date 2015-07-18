@@ -8,7 +8,7 @@ public static class ProjectileSystem {
 
 	static Transform projectileParent = null;
 
-	public static Projectile ShootProjectile(Projectile prefab, Vector3 pos, Vector3 aim) {
+	public static Projectile ShootProjectile(Projectile prefab, Vector3 pos, Vector3 aim, Collider shooter) {
 		var pool = GetPool( prefab );
 		if( pool.Count > 0 ) {
 			var instance = pool.Pop();
@@ -16,6 +16,7 @@ public static class ProjectileSystem {
 			instance.transform.position = pos;
 			instance.transform.forward = aim;
 			instance.SetAim(aim);
+			instance.SetShooter( shooter );
 			return instance;
 		} else {
 			return null;

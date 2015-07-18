@@ -44,6 +44,7 @@ public class Platform : MonoBehaviour {
 	public int pointValue = 1;
 	public float hFloatSpeed = 1f;
 	public float vFloatSpeed = 1f;
+	public Team ownedBy;
 
 	public event PlatformDelegate startedFloating;
 	public event PlatformDelegate stoppedFloating;

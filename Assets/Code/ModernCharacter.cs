@@ -63,6 +63,12 @@ public class ModernCharacter : MonoBehaviour {
 	[SerializeField]
 	Camera cam;
 
+	[SerializeField]
+	Transform head;
+
+	[SerializeField]
+	Transform headBone;
+
 	Vector3 targetRotationAngle = Vector3.zero;
 
 	[SerializeField]
@@ -81,6 +87,9 @@ public class ModernCharacter : MonoBehaviour {
 
 	void OnEnable() {
 		characterController = GetComponent<CharacterController>();
+		head.parent = headBone;
+		headBone.localPosition = Vector3.zero;
+		headBone.localRotation = Quaternion.identity;
 	}
 
 	void OnTriggerEnter( Collider other ) {
@@ -112,7 +121,7 @@ public class ModernCharacter : MonoBehaviour {
 		characterController.SimpleMove((Quaternion.Euler(new Vector3(0f, targetRotationAngle.y, 0f)) * velocity));
 
 		if( controller.a.down ) {
-			ProjectileSystem.ShootProjectile( projectile, transform.position, transform.forward );
+			ProjectileSystem.ShootProjectile( projectile, transform.position, transform.forward, characterController );
 		}
 	}
 

@@ -16,6 +16,11 @@ public class Projectile : MonoBehaviour {
 
 	Projectile prefab = null;
 
+	public Collider shooter {
+		get;
+		private set;
+	}
+
 	public void SetPrefab( Projectile prefab ) {
 		this.prefab = prefab;
 	}
@@ -27,6 +32,11 @@ public class Projectile : MonoBehaviour {
 	public void SetActive(bool active) {
 		gameObject.SetActive( active );
 		expireTime = Time.time + lifeTime;
+	}
+
+	public void SetShooter( Collider shooter ) {
+		this.shooter = shooter;
+		Physics.IgnoreCollision( shooter, GetComponent<Collider>() );
 	}
 
 	public void SetAim( Vector3 aim ) {

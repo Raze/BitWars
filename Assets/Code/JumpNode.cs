@@ -120,6 +120,7 @@ public class JumpNode : MonoBehaviour {
 				node2.node = null;
 				node2.oppositeTrigger = null;
 				node2 = null;
+				lineRenderer.SetVertexCount( 0 );
 				return;
 			}
 		}
