@@ -11,10 +11,32 @@ public class RetroCharacter : MonoBehaviour {
 	string rotationAxis;
 	string movementAxis;
 	Vector3 moveDirection = new Vector3(0f, 0f, -1f);
+	CharacterController characterController;
+	JumpNode.JumpFunction jumpFunction;
+	JumpNodeTrigger ignoreJumpNode;
+
+	void OnEnable() {
+		characterController = GetComponent<CharacterController>();
+	}
 
 	// Use this for initialization
 	void Start () {
 		selectJoystick();
+	}
+
+	void OnTriggerEnter(Collider other) {
+		var jumpNode = other.GetComponent<JumpNodeTrigger>();
+		if(jumpNode != null && jumpNode != ignoreJumpNode) {
+			jumpFunction = jumpNode.CreateJump();
+			ignoreJumpNode = jumpNode.oppositeTrigger;
+		}
+	}
+
+	void OnTriggerExit(Collider other) {
+		var jumpNode = other.GetComponent<JumpNodeTrigger>();
+		if(jumpNode == ignoreJumpNode) {
+			ignoreJumpNode = null;
+		}
 	}
 
 	// Update is called once per frame
@@ -23,9 +45,18 @@ public class RetroCharacter : MonoBehaviour {
 
 		transform.Rotate(new Vector3(
 			0f, angularSpeed * Time.deltaTime * Input.GetAxis(rotationAxis), 0f));
-		transform.Translate(moveDirection * speed * Time.deltaTime);
 
-		GetComponent<Animator>().SetFloat("Speed", Mathf.Abs(speed));
+		if(jumpFunction != null) {
+			if(jumpFunction.IsDone()) {
+				jumpFunction = null;
+			} else {
+				transform.position = jumpFunction.UpdateStep();
+			}
+		} else {
+			characterController.SimpleMove(moveDirection * speed);
+
+			GetComponent<Animator>().SetFloat("Speed", Mathf.Abs(speed));
+		}
 	}
 
 	void selectJoystick() {

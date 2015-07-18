@@ -109,7 +109,7 @@ public class ModernCharacter : MonoBehaviour {
 
 		transform.rotation = Quaternion.Euler( targetRotationAngle );
 
-		characterController.Move((Quaternion.Euler(new Vector3(0f, targetRotationAngle.y, 0f)) * velocity) * Time.deltaTime);
+		characterController.SimpleMove((Quaternion.Euler(new Vector3(0f, targetRotationAngle.y, 0f)) * velocity));
 
 		if( controller.a.down ) {
 			ProjectileSystem.ShootProjectile( projectile, transform.position, transform.forward );
