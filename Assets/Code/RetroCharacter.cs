@@ -4,7 +4,8 @@ using System.Collections;
 public class RetroCharacter : MonoBehaviour {
 
 	public bool enableDebugging = false;
-	public Projectile projectile;
+	public Projectile projectilePrefab;
+	public Transform projectileTransform;
 
 	const float linearSpeed  = 7.5f;
 	const float angularSpeed = 120f;
@@ -51,7 +52,8 @@ public class RetroCharacter : MonoBehaviour {
 		GetComponent<Animator>().SetFloat("Speed", Mathf.Abs(speed));
 
 		if (Input.GetKeyDown(shootButton)) {
-			ProjectileSystem.ShootProjectile(projectile, transform.position, transform.forward);
+			ProjectileSystem.ShootProjectile(
+				projectilePrefab, projectileTransform.position, projectileTransform.forward);
 		}
 
 
