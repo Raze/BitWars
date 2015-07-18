@@ -73,8 +73,32 @@ public class ModernCharacter : MonoBehaviour {
 	[SerializeField]
 	float minXRotation = 0f;
 
+	JumpNode.JumpFunction jumpFunction;
 
-	void Update() {
+	JumpNodeTrigger ignoreJumpNode;
+
+	CharacterController characterController;
+
+	void OnEnable() {
+		characterController = GetComponent<CharacterController>();
+	}
+
+	void OnTriggerEnter( Collider other ) {
+		var jumpNode = other.GetComponent<JumpNodeTrigger>();
+		if( jumpNode != null && ignoreJumpNode != jumpNode ) {
+			jumpFunction = jumpNode.CreateJump();
+			ignoreJumpNode = jumpNode.oppositeTrigger;
+		}
+	}
+
+	void OnTriggerExit( Collider other ) {
+		var jumpNode = other.GetComponent<JumpNodeTrigger>();
+		if( jumpNode != null && ignoreJumpNode == jumpNode ) {
+			ignoreJumpNode = null;
+		}
+	}
+
+	void GroundUpdate() {
 		controller.SetCurrentState( GamePad.GetState( PlayerIndex.One ) );
 
 		var velocity = new Vector3(controller.leftStick.x, 0f, controller.leftStick.y) * movementSpeed;
@@ -85,10 +109,26 @@ public class ModernCharacter : MonoBehaviour {
 
 		transform.rotation = Quaternion.Euler( targetRotationAngle );
 
-		transform.position += (Quaternion.Euler(new Vector3(0f, targetRotationAngle.y, 0f)) * velocity) * Time.deltaTime;
+		characterController.Move((Quaternion.Euler(new Vector3(0f, targetRotationAngle.y, 0f)) * velocity) * Time.deltaTime);
 
 		if( controller.a.down ) {
 			ProjectileSystem.ShootProjectile( projectile, transform.position, transform.forward );
+		}
+	}
+
+	void UpdateJump() {
+		if( jumpFunction.IsDone() ) {
+			jumpFunction = null;
+		} else {
+			transform.position = jumpFunction.UpdateStep();
+		}
+	}
+
+	void Update() {
+		if( jumpFunction != null ) {
+			UpdateJump();
+		} else {
+			GroundUpdate();
 		}
 	}
 }
