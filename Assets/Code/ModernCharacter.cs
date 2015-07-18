@@ -87,9 +87,11 @@ public class ModernCharacter : MonoBehaviour {
 
 	void OnEnable() {
 		characterController = GetComponent<CharacterController>();
+		var pos = head.localPosition;
+		var rot = head.localRotation;
 		head.parent = headBone;
-		headBone.localPosition = Vector3.zero;
-		headBone.localRotation = Quaternion.identity;
+		head.localPosition = pos;
+		head.localRotation = rot;
 	}
 
 	void OnTriggerEnter( Collider other ) {
