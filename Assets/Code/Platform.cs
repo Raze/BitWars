@@ -1,20 +1,37 @@
 ﻿using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.Events;
 using System.Collections;
 using System.Collections.Generic;
 
 public class Platform : MonoBehaviour {
-	static HashSet<Platform> allPlatforms = new HashSet<Platform>();
+	public static HashSet<Platform> allPlatforms = new HashSet<Platform>();
+
+	public delegate void PlatformDelegate(Platform p);
+	public delegate void PlatformDelegate2(Platform p1, Platform p2);
+
+	public static event PlatformDelegate anyStartedFloating;
+	public static event PlatformDelegate anyStoppedFloating;
+	public static event PlatformDelegate2 swapStarted;
+	public static event PlatformDelegate2 swapFinished;
 
 	// Start floating p1 and p2 such that their positions will eventually be exchanged.
-	// p2 will float above p1 by floatHeightStep to avoid a collision.
-	static public void swap(GameObject p1, GameObject p2) {
+	// p2 will float above p1. Returns an event that fires after _both_ platforms have
+	// finished moving.
+	public static void swap(GameObject p1, GameObject p2) {
 		swap(p1.GetComponent<Platform>(), p2.GetComponent<Platform>());
 	}
 
-	static public void swap(Platform p1, Platform p2) {
+	public static void swap(Platform p1, Platform p2) {
 		p1.floatToPoint(p2.transform.position);
 		p2.floatToPoint(p1.transform.position);
+		if (swapStarted != null) swapStarted(p1, p2);
+
+		PlatformDelegate onFinish = (p) => {
+			if (!p1.floating && !p2.floating && swapFinished != null) swapFinished(p1, p2);
+		};
+		p1.stoppedFloating += onFinish;
+		p2.stoppedFloating += onFinish;
 	}
 
 	static bool floatSlotOccupied(int slot) {
@@ -28,9 +45,13 @@ public class Platform : MonoBehaviour {
 	public float hFloatSpeed = 1f;
 	public float vFloatSpeed = 1f;
 
+	public event PlatformDelegate startedFloating;
+	public event PlatformDelegate stoppedFloating;
+
 	[System.NonSerialized] public bool floating = false;
 	[System.NonSerialized] public float totalFloatDuration;
 	[System.NonSerialized] public float floatStartTime;
+
 	protected int floatSlot;
 	protected float floatHeight;
 	protected Vector3 floatOrigin;
@@ -57,10 +78,14 @@ public class Platform : MonoBehaviour {
 		forward = (floatTarget - floatOrigin).normalized;
 
 		floating = true;
+		if (startedFloating != null) startedFloating(this);
+		if (anyStartedFloating != null) anyStartedFloating(this);
 	}
 
 	private void floatToPointDone() {
 		floating = false;
+		if (stoppedFloating != null) stoppedFloating(this);
+		if (anyStoppedFloating != null) anyStoppedFloating(this);
 	}
 
 	void OnEnable() {
