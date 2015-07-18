@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public static class ProjectileSystem {
 
-	static Dictionary<GameObject, Stack<Projectile>> projectilePool = new Dictionary<GameObject, Stack<Projectile>>();
+	static Dictionary<GameObject, Stack<Projectile>> projectilePools = new Dictionary<GameObject, Stack<Projectile>>();
 
 	static Transform projectileParent = null;
 
@@ -15,7 +15,7 @@ public static class ProjectileSystem {
 			instance.SetActive( true );
 			instance.transform.position = pos;
 			instance.transform.forward = aim;
-			instance.velocity = aim;
+			instance.SetAim(aim);
 			return instance;
 		} else {
 			return null;
@@ -30,8 +30,9 @@ public static class ProjectileSystem {
 
 	static Stack<Projectile> GetPool( Projectile prefab ) {
 		Stack<Projectile> pool;
-		if( !projectilePool.TryGetValue( prefab.gameObject, out pool ) ) {
+		if( !projectilePools.TryGetValue( prefab.gameObject, out pool ) ) {
 			pool = CreatePool( prefab );
+			projectilePools.Add( prefab.gameObject, pool );
 		}
 		return pool;
 	}

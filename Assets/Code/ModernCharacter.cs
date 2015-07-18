@@ -63,24 +63,32 @@ public class ModernCharacter : MonoBehaviour {
 	[SerializeField]
 	Camera cam;
 
-	Vector3 aim;
+	Vector3 targetRotationAngle = Vector3.zero;
+
+	[SerializeField]
+	Vector2 rotationSpeed = new Vector2( 10f, 10f );
+
+	[SerializeField]
+	float maxXRotation = 0f;
+	[SerializeField]
+	float minXRotation = 0f;
 
 
 	void Update() {
 		controller.SetCurrentState( GamePad.GetState( PlayerIndex.One ) );
 
-		var velocity = controller.leftStick * movementSpeed;
-		var currentAim = new Vector3(controller.rightStick.x, 0f, controller.rightStick.y).normalized;
+		var velocity = new Vector3(controller.leftStick.x, 0f, controller.leftStick.y) * movementSpeed;
 
-		transform.position += new Vector3(velocity.x, 0f, velocity.y) * Time.deltaTime;
-		cam.transform.position = transform.position + Vector3.up * 10f;
-		if( currentAim != Vector3.zero ) {
-			transform.forward = new Vector3(currentAim.y, 0f, -currentAim.x);
-			aim = currentAim;
-		}
+		targetRotationAngle.x += controller.rightStick.y * rotationSpeed.y * Time.deltaTime;
+		targetRotationAngle.y += controller.rightStick.x * rotationSpeed.x * Time.deltaTime;
+		targetRotationAngle.x = Mathf.Clamp( targetRotationAngle.x, minXRotation, maxXRotation );
+
+		transform.rotation = Quaternion.Euler( targetRotationAngle );
+
+		transform.position += (Quaternion.Euler(new Vector3(0f, targetRotationAngle.y, 0f)) * velocity) * Time.deltaTime;
 
 		if( controller.a.down ) {
-			ProjectileSystem.ShootProjectile( projectile, transform.position, aim );
+			ProjectileSystem.ShootProjectile( projectile, transform.position, transform.forward );
 		}
 	}
 }

@@ -7,7 +7,10 @@ public class Projectile : MonoBehaviour {
 
 	public float lifeTime = 5f;
 
-	public Vector3 velocity;
+	public float speed = 10f;
+
+	Vector3 aim;
+	Vector3 velocity;
 
 	float expireTime = -1f;
 
@@ -24,6 +27,11 @@ public class Projectile : MonoBehaviour {
 	public void SetActive(bool active) {
 		gameObject.SetActive( active );
 		expireTime = Time.time + lifeTime;
+	}
+
+	public void SetAim( Vector3 aim ) {
+		this.aim = aim;
+		velocity = this.aim * speed;
 	}
 
 	protected void Update() {
