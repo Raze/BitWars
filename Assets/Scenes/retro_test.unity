@@ -240,7 +240,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 783812733}
   m_LocalRotation: {x: -.0527229309, y: -.0482247286, z: .00255022245, w: -.997440815}
-  m_LocalPosition: {x: -.101163395, y: 1.12869155, z: -2.83766174}
+  m_LocalPosition: {x: -.101163417, y: 1.12869155, z: -2.83766198}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1462088074}
@@ -371,3 +371,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enableDebugging: 0
+  projectile: {fileID: 11415542, guid: 50f5b541fc091dc429fbddaf3098126b, type: 2}
