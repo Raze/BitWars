@@ -55,9 +55,11 @@ public class JumpNode : MonoBehaviour {
 
 	void Start() {
 		node1.oppositeTrigger = node2;
-		node2.oppositeTrigger = node1;
 		node1.node = this;
-		node2.node = this;
+		if( node2 != null ) {
+			node2.oppositeTrigger = node1;
+			node2.node = this;
+		}
 	}
 
 	Vector3 PositionAt( float t ) {
@@ -98,7 +100,30 @@ public class JumpNode : MonoBehaviour {
 
 	void Update() {
 		var pos1 = node1.transform.position;
+		if( node2 == null ) {
+			node2 = JumpNodeTrigger.FindClosestNode(pos1);
+			if( node2 != null ) {
+				node2.oppositeTrigger = node1;
+				node2.node = this;
+			} else {
+				return;
+			}
+		}
 		var pos2 = node2.transform.position;
+		if(node2.connectToClosest) {
+			var t1 = pos1;
+			var t2 = pos2;
+			t1.y = 0f;
+			t2.y = 0f;
+			var d = Vector3.Distance( t1, t2 );
+			if( d > Constants.instance.jumpNodeConnectDistance ) {
+				node2.node = null;
+				node2.oppositeTrigger = null;
+				node2 = null;
+				return;
+			}
+		}
+
 		float distance;
 		CalculateCurve(pos1, pos2, heightByDistance, out distance);
 		UpdateRenderer();
