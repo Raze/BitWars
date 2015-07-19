@@ -81,6 +81,9 @@ public class ModernCharacter : MonoBehaviour {
 
 	JumpNode.JumpFunction jumpFunction;
 
+	[SerializeField]
+	Animator animator;
+
 	JumpNodeTrigger ignoreJumpNode;
 
 	CharacterController characterController;
@@ -121,6 +124,7 @@ public class ModernCharacter : MonoBehaviour {
 		transform.rotation = Quaternion.Euler( targetRotationAngle );
 
 		characterController.SimpleMove((Quaternion.Euler(new Vector3(0f, targetRotationAngle.y, 0f)) * velocity));
+		animator.SetFloat( "Speed", velocity.magnitude );
 
 		if( controller.a.down ) {
 			ProjectileSystem.ShootProjectile( projectile, transform.position, transform.forward, characterController );

@@ -704,7 +704,7 @@ Animator:
   m_GameObject: {fileID: 116418}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: c7f7099c16dbda647ad845e06cad4d1c, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6a0c1163a3391624c8721f3c89c2c30f, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -723,14 +723,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec2a25d88b82bf44e926366fe249d6fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectile: {fileID: 11415542, guid: 50f5b541fc091dc429fbddaf3098126b, type: 2}
-  movementSpeed: 2
+  projectile: {fileID: 11415542, guid: 48596de48b8eeb94ba630e7ca8bb66e3, type: 2}
+  movementSpeed: 10
   cam: {fileID: 2097408}
   head: {fileID: 442436}
   headBone: {fileID: 404888}
   rotationSpeed: {x: 30, y: 20}
   maxXRotation: 20
   minXRotation: -20
+  animator: {fileID: 9590422}
 --- !u!124 &12424398
 Behaviour:
   m_ObjectHideFlags: 1
@@ -842,6 +843,23 @@ Prefab:
       propertyPath: m_NormalizedViewPortRect.x
       value: .5
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 6a0c1163a3391624c8721f3c89c2c30f, type: 2}
+    - target: {fileID: 0}
+      propertyPath: movementSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: projectile
+      value: 
+      objectReference: {fileID: 11415542, guid: 48596de48b8eeb94ba630e7ca8bb66e3,
+        type: 2}
+    - target: {fileID: 0}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 9590422}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 172932}

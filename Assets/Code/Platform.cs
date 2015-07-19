@@ -61,7 +61,6 @@ public class Platform : MonoBehaviour {
 	private Vector3 forward;
 	private float vFloatTime;
 
-	const float floatHeightStep = 1;
 	private Vector3 up = new Vector3(0f, 1f, 0f);
 
 	protected void floatToPoint(Vector3 target) {
@@ -71,7 +70,7 @@ public class Platform : MonoBehaviour {
 
 		floatSlot = 0;
 		while (floatSlotOccupied(floatSlot)) floatSlot += 1;
-		floatHeight = floatSlot*floatHeightStep;
+		floatHeight = floatSlot * Constants.instance.floatHeightStep;
 
 		vFloatTime = floatHeight/vFloatSpeed;
 		totalFloatDuration = 2*vFloatTime + (floatTarget - floatOrigin).magnitude/hFloatSpeed;

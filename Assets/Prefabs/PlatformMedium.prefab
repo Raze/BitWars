@@ -2254,8 +2254,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pointValue: 5
-  hFloatSpeed: 1
-  vFloatSpeed: 1
+  hFloatSpeed: 10
+  vFloatSpeed: 10
   ownedBy: 0
 --- !u!222 &22210168
 CanvasRenderer:
@@ -2558,6 +2558,14 @@ Prefab:
       propertyPath: platform
       value: 
       objectReference: {fileID: 11498856}
+    - target: {fileID: 0}
+      propertyPath: hFloatSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: vFloatSpeed
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 119656}
