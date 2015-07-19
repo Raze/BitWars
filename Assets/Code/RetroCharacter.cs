@@ -127,6 +127,7 @@ public class RetroCharacter : MonoBehaviour {
 		shootButton2 = (KeyCode)((int)KeyCode.Joystick1Button3 + joystickDelta*j);
 	}
 
+	/*
 	void OnGUI() {
 		GUIStyle style = new GUIStyle();
 		style.normal.textColor = Color.red;
@@ -135,4 +136,5 @@ public class RetroCharacter : MonoBehaviour {
 		GUILayout.Label ("localVelocity: " + localVelocity.ToString(), style);
 		GUILayout.EndArea ();
 	}
+	*/
 }

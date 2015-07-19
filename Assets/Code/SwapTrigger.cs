@@ -7,7 +7,13 @@ public class SwapTrigger : MonoBehaviour {
 
 	public CaptureTrigger capture;
 	public Platform swapWith;
+	public GameObject contentsPrefab;
 
+	void Start() {
+		GameObject contents = Instantiate(contentsPrefab);
+		contents.transform.parent = transform;
+		contents.transform.localPosition = Vector3.zero;
+	}
 
 	void OnTriggerEnter( Collider other ) {
 		bool swap = false;

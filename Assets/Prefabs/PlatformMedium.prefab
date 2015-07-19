@@ -1918,6 +1918,7 @@ MonoBehaviour:
   label: {fileID: 11409250}
   capture: {fileID: 0}
   swapWith: {fileID: 0}
+  contentsPrefab: {fileID: 111356, guid: b91eef9579e9ed742b0abb70f1a6fe4b, type: 2}
 --- !u!114 &11417374
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1932,6 +1933,7 @@ MonoBehaviour:
   label: {fileID: 11402544}
   capture: {fileID: 0}
   swapWith: {fileID: 0}
+  contentsPrefab: {fileID: 111356, guid: b91eef9579e9ed742b0abb70f1a6fe4b, type: 2}
 --- !u!114 &11419760
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1965,6 +1967,7 @@ MonoBehaviour:
   label: {fileID: 11462106}
   capture: {fileID: 0}
   swapWith: {fileID: 0}
+  contentsPrefab: {fileID: 111356, guid: b91eef9579e9ed742b0abb70f1a6fe4b, type: 2}
 --- !u!114 &11429022
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2021,6 +2024,7 @@ MonoBehaviour:
   label: {fileID: 11472000}
   capture: {fileID: 0}
   swapWith: {fileID: 0}
+  contentsPrefab: {fileID: 111356, guid: b91eef9579e9ed742b0abb70f1a6fe4b, type: 2}
 --- !u!114 &11440134
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2566,6 +2570,10 @@ Prefab:
       propertyPath: vFloatSpeed
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: contentsPrefab
+      value: 
+      objectReference: {fileID: 111356, guid: b91eef9579e9ed742b0abb70f1a6fe4b, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 119656}
