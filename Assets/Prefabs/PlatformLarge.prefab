@@ -1082,7 +1082,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 168254}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -27.668066, y: 27.7119293, z: .139999986}
+  m_LocalPosition: {x: 40.5, y: 43, z: 39.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 445800}
@@ -1307,7 +1307,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: f3f1160b49cd21e42a835074184e4e84, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -1866,6 +1866,7 @@ MonoBehaviour:
   label: {fileID: 11446334}
   capture: {fileID: 0}
   swapWith: {fileID: 0}
+  contentsPrefab: {fileID: 111356, guid: b91eef9579e9ed742b0abb70f1a6fe4b, type: 2}
 --- !u!114 &11410036
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2160,6 +2161,7 @@ MonoBehaviour:
   label: {fileID: 11450266}
   capture: {fileID: 0}
   swapWith: {fileID: 0}
+  contentsPrefab: {fileID: 111356, guid: b91eef9579e9ed742b0abb70f1a6fe4b, type: 2}
 --- !u!114 &11466398
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2227,6 +2229,7 @@ MonoBehaviour:
   label: {fileID: 11433532}
   capture: {fileID: 0}
   swapWith: {fileID: 0}
+  contentsPrefab: {fileID: 111356, guid: b91eef9579e9ed742b0abb70f1a6fe4b, type: 2}
 --- !u!114 &11490072
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2257,6 +2260,7 @@ MonoBehaviour:
   label: {fileID: 11431432}
   capture: {fileID: 0}
   swapWith: {fileID: 0}
+  contentsPrefab: {fileID: 111356, guid: b91eef9579e9ed742b0abb70f1a6fe4b, type: 2}
 --- !u!222 &22209666
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -2566,6 +2570,14 @@ Prefab:
       propertyPath: vFloatSpeed
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 0}
+      propertyPath: contentsPrefab
+      value: 
+      objectReference: {fileID: 111356, guid: b91eef9579e9ed742b0abb70f1a6fe4b, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 168254}
