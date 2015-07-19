@@ -42,9 +42,12 @@ public class Platform : MonoBehaviour {
 	}
 
 	public int pointValue = 1;
-	public float hFloatSpeed = 1f;
-	public float vFloatSpeed = 1f;
+	public float hFloatSpeed = 4f;
+	public float vFloatSpeed = 2f;
 	public Team ownedBy;
+
+	private Vector3 velocity = Vector3.zero;
+	public Vector3 Velocity { get{ return velocity; }	}
 
 	public event PlatformDelegate startedFloating;
 	public event PlatformDelegate stoppedFloating;
@@ -61,7 +64,7 @@ public class Platform : MonoBehaviour {
 	private Vector3 forward;
 	private float vFloatTime;
 
-	const float floatHeightStep = 1;
+	const float floatHeightStep = 5;
 	private Vector3 up = new Vector3(0f, 1f, 0f);
 
 	protected void floatToPoint(Vector3 target) {
@@ -102,6 +105,7 @@ public class Platform : MonoBehaviour {
 	}
 
 	void updateFloating() {
+		var prevPosition = transform.position;
 		var elapsed = Time.time - floatStartTime;
 		if (elapsed < vFloatTime) {
 			// Lifting off.
@@ -117,5 +121,6 @@ public class Platform : MonoBehaviour {
 			transform.position = floatTarget;
 			floatToPointDone();
 		}
+		velocity = (transform.position - prevPosition)/Time.deltaTime;
 	}
 }

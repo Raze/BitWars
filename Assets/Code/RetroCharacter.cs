@@ -1,24 +1,30 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent (typeof (Character))]
 public class RetroCharacter : MonoBehaviour {
 
 	public bool enableDebugging = false;
 	public Projectile projectilePrefab;
 	public Transform projectileTransform;
 
-	const float linearSpeed  = 7.5f;
-	const float angularSpeed = 120f;
+	const float linearSpeed  = 40f;
+	const float angularSpeed = 270f;
+
+	const float airborneLinearSpeed = 0f;
+	const float airborneAngularSpeed = angularSpeed;
 
 	string rotationAxis;
 	string movementAxis;
 	KeyCode shootButton;
 	Vector3 moveDirection = new Vector3(0f, 0f, -1f);
 	CharacterController characterController;
+	Character character;
 	JumpNode.JumpFunction jumpFunction;
 	JumpNodeTrigger ignoreJumpNode;
 
 	void OnEnable() {
+		character = GetComponent<Character>();
 		characterController = GetComponent<CharacterController>();
 	}
 
@@ -44,18 +50,10 @@ public class RetroCharacter : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		var speed = linearSpeed * Input.GetAxis(movementAxis);
-		transform.Rotate(new Vector3(
-			0f, angularSpeed * Time.deltaTime * Input.GetAxis(rotationAxis), 0f));
-
-		transform.Translate(moveDirection * speed * Time.deltaTime);
-		GetComponent<Animator>().SetFloat("Speed", Mathf.Abs(speed));
-
-		if (Input.GetKeyDown(shootButton)) {
-			ProjectileSystem.ShootProjectile(
-				projectilePrefab, projectileTransform.position, projectileTransform.forward, characterController);
-		}
-
+		var speed = (characterController.isGrounded ? airborneLinearSpeed : linearSpeed)
+			* Input.GetAxis(movementAxis);
+		transform.Rotate(new Vector3(0f, (characterController.isGrounded ? airborneAngularSpeed : angularSpeed)
+			* Time.deltaTime * Input.GetAxis(rotationAxis), 0f));
 
 		if(jumpFunction != null) {
 			if(jumpFunction.IsDone()) {
@@ -64,9 +62,15 @@ public class RetroCharacter : MonoBehaviour {
 				transform.position = jumpFunction.UpdateStep();
 			}
 		} else {
-			characterController.SimpleMove(transform.TransformVector( moveDirection * speed ));
+			characterController.SimpleMove(transform.TransformVector(
+					character.BaseVelocity + moveDirection*speed));
+			GetComponent<Animator>().SetFloat("Speed",
+				characterController.isGrounded ? Mathf.Abs(speed) : 0f);
+		}
 
-			GetComponent<Animator>().SetFloat("Speed", Mathf.Abs(speed));
+		if (Input.GetKeyDown(shootButton)) {
+			ProjectileSystem.ShootProjectile(
+				projectilePrefab, projectileTransform.position, projectileTransform.forward, characterController);
 		}
 	}
 

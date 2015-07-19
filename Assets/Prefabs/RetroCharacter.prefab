@@ -11,6 +11,7 @@ GameObject:
   - 95: {fileID: 9519726}
   - 114: {fileID: 11413856}
   - 143: {fileID: 14313016}
+  - 114: {fileID: 11454878}
   m_Layer: 0
   m_Name: RetroCharacter
   m_TagString: Untagged
@@ -650,6 +651,17 @@ MonoBehaviour:
   enableDebugging: 0
   projectilePrefab: {fileID: 11415542, guid: 48596de48b8eeb94ba630e7ca8bb66e3, type: 2}
   projectileTransform: {fileID: 412000}
+--- !u!114 &11454878
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 103960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10550ea15056f4f43a293afc03d62d39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!124 &12432564
 Behaviour:
   m_ObjectHideFlags: 1
