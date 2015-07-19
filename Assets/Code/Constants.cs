@@ -12,5 +12,6 @@ public class Constants : MonoBehaviour {
 
 	void OnEnable() {
 		instance = this;
+		Physics.gravity = -Vector3.up * 80f;
 	}
 }
