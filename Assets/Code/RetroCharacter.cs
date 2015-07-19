@@ -20,7 +20,9 @@ public class RetroCharacter : MonoBehaviour {
 	string rotationAxis;
 	string movementAxis;
 	KeyCode shootButton1, shootButton2;
+	KeyCode shootButton3 = KeyCode.Return;
 	KeyCode jumpButton1, jumpButton2;
+	KeyCode jumpButton3 = KeyCode.Space;
 
 	CharacterController characterController;
 	Character character;
@@ -57,6 +59,8 @@ public class RetroCharacter : MonoBehaviour {
 		var jumpNode = other.GetComponent<JumpNodeTrigger>();
 		if(jumpNode == ignoreJumpNode) {
 			ignoreJumpNode = null;
+		} else {
+			GameObject.Find("RetroJump").GetComponent<AudioSource>().Play();
 		}
 	}
 
@@ -96,15 +100,17 @@ public class RetroCharacter : MonoBehaviour {
 			localVelocity += Physics.gravity * Time.deltaTime;
 		}
 
-		if (Input.GetKeyDown(shootButton1) || Input.GetKeyDown(shootButton2)) {
+		if (Input.GetKeyDown(shootButton1) || Input.GetKeyDown(shootButton2) || Input.GetKeyDown(shootButton3)) {
 			// Effect the shoot button.
 			ProjectileSystem.ShootProjectile(
 				projectilePrefab, projectileTransform.position, projectileTransform.forward, characterController);
+			GameObject.Find("RetroShoot").GetComponent<AudioSource>().Play();
 		}
 		
-		if (grounded && (Input.GetKeyDown(jumpButton1) || Input.GetKeyDown(jumpButton2))) {
+		if (grounded && (Input.GetKeyDown(jumpButton1) || Input.GetKeyDown(jumpButton2) || Input.GetKeyDown(jumpButton3))) {
 			// Effect the jump button.
 			localVelocity += jumpVelocity;
+			GameObject.Find("RetroJump").GetComponent<AudioSource>().Play();
 		}
 	}
 
@@ -114,17 +120,24 @@ public class RetroCharacter : MonoBehaviour {
 		for (j=0; j<names.Length; ++j) {
 			if (names[j].Contains("SPEED-LINK")) break;
 		}
-		if (j >= names.Length) j = 0;
-		Debug.Log("Using joystick " + (j+1).ToString() + ", \"" + names[j] + "\", for Retro character.");
+		if (j < names.Length) {
+			Debug.Log("Using joystick " + (j+1).ToString() + ", \"" + names[j] + "\", for Retro character.");
+			rotationAxis = "Joy" + (j+1).ToString() + "Axis0";
+			movementAxis = "Joy" + (j+1).ToString() + "Axis1";
 
-		rotationAxis = "Joy" + (j+1).ToString() + "Axis0";
-		movementAxis = "Joy" + (j+1).ToString() + "Axis1";
-
-		int joystickDelta = (int)KeyCode.Joystick2Button0 - (int)KeyCode.Joystick1Button0;
-		jumpButton1 = (KeyCode)((int)KeyCode.Joystick1Button0 + joystickDelta*j);
-		jumpButton2 = (KeyCode)((int)KeyCode.Joystick1Button1 + joystickDelta*j);
-		shootButton1 = (KeyCode)((int)KeyCode.Joystick1Button2 + joystickDelta*j);
-		shootButton2 = (KeyCode)((int)KeyCode.Joystick1Button3 + joystickDelta*j);
+			int joystickDelta = (int)KeyCode.Joystick2Button0 - (int)KeyCode.Joystick1Button0;
+			jumpButton1 = (KeyCode)((int)KeyCode.Joystick1Button0 + joystickDelta*j);
+			jumpButton2 = (KeyCode)((int)KeyCode.Joystick1Button1 + joystickDelta*j);
+			shootButton1 = (KeyCode)((int)KeyCode.Joystick1Button2 + joystickDelta*j);
+			shootButton2 = (KeyCode)((int)KeyCode.Joystick1Button3 + joystickDelta*j);
+		} else {
+			rotationAxis = "Joy1Axis0";
+			movementAxis = "Joy1Axis1";
+			jumpButton1 = KeyCode.Space;
+			jumpButton2 = KeyCode.Space;
+			shootButton1 = KeyCode.Return;
+			shootButton2 = KeyCode.Return;
+		}
 	}
 
 	/*
