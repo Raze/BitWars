@@ -32,7 +32,6 @@ public class Character : MonoBehaviour {
 		transform.parent = newParent;
 	}
 
-	/*
 	void OnGUI() {
 		GUILayout.BeginArea( new Rect( 0f, 0f, Screen.width, Screen.height ) );
 		GUILayout.Label("Grounded:       " + charCtrl.isGrounded.ToString());
@@ -40,12 +39,19 @@ public class Character : MonoBehaviour {
 		//GUILayout.Label("Platform below: " + (getPlatformBelow() != null).ToString());
 		GUILayout.EndArea();
 	}
-	*/
 
 	Platform getPlatformBelow() {
 		RaycastHit hit;
 		if (!Physics.Raycast(new Ray(transform.position, -transform.up), out hit, rayMaxDistance))
 			return null;
-		return hit.collider.gameObject.GetComponent<Platform>();
+
+		var obj = hit.collider.gameObject;
+		while (obj != null) {
+			var platform = obj.GetComponent<Platform>();
+			if (platform != null) return platform;
+			obj = obj.transform.parent.gameObject;
+		}
+
+		return null;
 	}
 }
