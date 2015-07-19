@@ -31,11 +31,18 @@ public class RetroCharacter : MonoBehaviour {
 	void OnEnable() {
 		character = GetComponent<Character>();
 		characterController = GetComponent<CharacterController>();
+		character.onDeath += onDeath;
 	}
 
 	// Use this for initialization
 	void Start () {
 		selectJoystick();
+	}
+
+	void onDeath() {
+		jumpFunction = null;
+		ignoreJumpNode = null;
+		localVelocity = Vector3.zero;
 	}
 
 	void OnTriggerEnter(Collider other) {

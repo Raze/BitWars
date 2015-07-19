@@ -14,6 +14,9 @@ public class CaptureTrigger : MonoBehaviour {
 	UnityEngine.UI.Text label;
 
 	[SerializeField]
+	UnityEngine.UI.Text pointsLabel;
+
+	[SerializeField]
 	SwapTrigger[] swapTriggers;
 
 	ModernCharacter modern;
@@ -24,6 +27,8 @@ public class CaptureTrigger : MonoBehaviour {
 
 	void Start() {
 		Lock();
+
+		pointsLabel.text = "{0} Points".Fmt( platform.pointValue );
 	}
 
 	void OnTriggerEnter( Collider other ) {
@@ -77,9 +82,9 @@ public class CaptureTrigger : MonoBehaviour {
 		}
 
 		if( unlocked ) {
-			label.text = "Capture!";
+			label.text = "Captured!";
 		} else {
-			label.text = "Capture: " + Mathf.Max(0f, (captureTime - currentTime )).ToString();
+			label.text = "Capture: " + Mathf.Max(0f, (captureTime - currentTime )).ToString("0.0");
 		}
 	}
 

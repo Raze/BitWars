@@ -108,7 +108,7 @@ public class Platform : MonoBehaviour {
 		if (floating) updateFloating();
 	}
 
-	void setOwner(Team newOwner) {
+	public void setOwner(Team newOwner) {
 		ownedBy = newOwner;
 		var meshRenderer = gameObject.GetComponentInChildren<MeshRenderer>();
 		meshRenderer.material = (ownedBy == Team.retro)

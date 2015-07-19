@@ -7,6 +7,22 @@ public class Character : MonoBehaviour {
 	bool onPlatform = false;
 	Platform containingPlatform = null;
 
+	public event System.Action onDeath;
+	public event System.Action onRespawn;
+
+	[SerializeField]
+	float maxHealth;
+
+	[SerializeField]
+	Transform spawnPoint;
+
+	public float respawnTime = 3f;
+	public UnityEngine.UI.Text respawnLabel;
+	[SerializeField]
+	UnityEngine.UI.Text healthLabel;
+
+	float currentHealth;
+
 	private Vector3 baseVelocity;
 	public Vector3 BaseVelocity { get { return baseVelocity; } }
 
@@ -16,6 +32,10 @@ public class Character : MonoBehaviour {
 	void Start () {
 		charCtrl = GetComponent<CharacterController>();
 		baseVelocity = Vector3.zero;
+		currentHealth = maxHealth;
+		healthLabel.text = "Health: " + currentHealth;
+		respawnLabel.gameObject.SetActive( false );
+		transform.position = spawnPoint.position;
 	}
 	
 	// Update is called once per frame
@@ -30,6 +50,45 @@ public class Character : MonoBehaviour {
 			baseVelocity = Vector3.zero;
 		}
 		transform.parent = newParent;
+
+		if( transform.position.y < -10f ) {
+			die();
+			return;
+		}
+	}
+
+	public void damage( float damage ) {
+		currentHealth -= damage;
+		healthLabel.text = "Health: " + currentHealth;
+		if( currentHealth <= 0f ) {
+			die();
+		}
+	}
+
+	public void die() {
+		if( onDeath != null ) {
+			onDeath();
+		}
+
+		containingPlatform = null;
+		onPlatform = false;
+		transform.parent = null;
+		baseVelocity = Vector3.zero;
+		healthLabel.gameObject.SetActive( false );
+
+		Game.instance.respawn( this );
+	}
+
+	public void respawn() {
+		currentHealth = maxHealth;
+		healthLabel.text = "Health: " + currentHealth;
+		transform.position = spawnPoint.position;
+
+		healthLabel.gameObject.SetActive( true );
+
+		if( onRespawn != null ) {
+			onRespawn();
+		}
 	}
 
 	void OnGUI() {

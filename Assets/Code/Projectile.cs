@@ -9,8 +9,12 @@ public class Projectile : MonoBehaviour {
 
 	public float speed = 10f;
 
+	public float damage = 5f;
+
 	Vector3 aim;
 	Vector3 velocity;
+
+	Vector3 lastPosition;
 
 	float expireTime = -1f;
 
@@ -36,7 +40,7 @@ public class Projectile : MonoBehaviour {
 
 	public void SetShooter( Collider shooter ) {
 		this.shooter = shooter;
-		Physics.IgnoreCollision( shooter, GetComponent<Collider>() );
+		//Physics.IgnoreCollision( shooter, GetComponent<Collider>() );
 	}
 
 	public void SetAim( Vector3 aim ) {
@@ -47,8 +51,25 @@ public class Projectile : MonoBehaviour {
 	protected void Update() {
 		if( Time.time > expireTime ) {
 			ProjectileSystem.FreeProjectile( this );
+			return;
 		}
 
+		lastPosition = transform.position;
 		transform.position += velocity * Time.deltaTime;
+
+		var delta = transform.position - lastPosition;
+		var ray = new Ray(lastPosition, delta);
+
+		RaycastHit hit;
+		if( Physics.Raycast( ray, out hit, delta.magnitude ) ) {
+			if( hit.collider != shooter ) {
+				var character = hit.collider.GetComponent<Character>();
+				if( character != null ) {
+					character.damage( damage );
+				}
+				ProjectileSystem.FreeProjectile( this );
+				return;
+			}
+		}
 	}
 }
