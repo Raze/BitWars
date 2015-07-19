@@ -81,15 +81,20 @@ public class ModernCharacter : MonoBehaviour {
 
 	JumpNode.JumpFunction jumpFunction;
 
+	[SerializeField]
+	Animator animator;
+
 	JumpNodeTrigger ignoreJumpNode;
 
 	CharacterController characterController;
 
 	void OnEnable() {
 		characterController = GetComponent<CharacterController>();
+		var pos = head.localPosition;
+		var rot = head.localRotation;
 		head.parent = headBone;
-		headBone.localPosition = Vector3.zero;
-		headBone.localRotation = Quaternion.identity;
+		head.localPosition = pos;
+		head.localRotation = rot;
 	}
 
 	void OnTriggerEnter( Collider other ) {
@@ -119,6 +124,7 @@ public class ModernCharacter : MonoBehaviour {
 		transform.rotation = Quaternion.Euler( targetRotationAngle );
 
 		characterController.SimpleMove((Quaternion.Euler(new Vector3(0f, targetRotationAngle.y, 0f)) * velocity));
+		animator.SetFloat( "Speed", velocity.magnitude );
 
 		if( controller.a.down ) {
 			ProjectileSystem.ShootProjectile( projectile, transform.position, transform.forward, characterController );

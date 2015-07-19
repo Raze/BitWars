@@ -78,7 +78,7 @@ public class RetroCharacter : MonoBehaviour {
 		string[] names = Input.GetJoystickNames();
 		int j;
 		for (j=0; j<names.Length; ++j) {
-			if (! names[j].Contains("SPEED-LINK")) continue;
+			if (! names[j].Contains("SPEED-LINK")) break;
 		}
 		if (j >= names.Length) j = 0;
 		Debug.Log("Using joystick " + (j+1).ToString() + ", \"" + names[j] + "\", for Retro character.");

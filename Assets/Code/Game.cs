@@ -8,8 +8,11 @@ public enum Team {
 }
 
 public class Game : MonoBehaviour {
-	public int retroScore = 0;
-	public int modernScore = 0;
+	int retroScore = 0;
+	int modernScore = 0;
+
+	public UnityEngine.UI.Text retroScoreLabel;
+	public UnityEngine.UI.Text modernScoreLabel;
 
 	public static Game instance {
 		get;
@@ -22,6 +25,12 @@ public class Game : MonoBehaviour {
 			a.ownedBy = b.ownedBy;
 			b.ownedBy = t;
 		};
+	}
+
+	void Update() {
+		CalculateScore();
+		retroScoreLabel.text = "Score: " + retroScore;
+		modernScoreLabel.text = "Score: " + modernScore;
 	}
 
 	void CalculateScore() {

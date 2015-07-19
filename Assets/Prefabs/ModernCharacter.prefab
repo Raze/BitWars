@@ -120,7 +120,6 @@ GameObject:
   - 4: {fileID: 442436}
   - 33: {fileID: 3307388}
   - 23: {fileID: 2337796}
-  - 95: {fileID: 9509034}
   m_Layer: 0
   m_Name: Modern_head
   m_TagString: Untagged
@@ -420,8 +419,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 117992}
-  m_LocalRotation: {x: -.707106829, y: 0, z: -0, w: .707106829}
-  m_LocalPosition: {x: .912958801, y: .0696688443, z: .55222249}
+  m_LocalRotation: {x: 0, y: 0, z: .707106829, w: .707106709}
+  m_LocalPosition: {x: -.100000001, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 456502}
@@ -462,7 +461,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 172932}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -71.5, y: 8.03999996, z: 0}
+  m_LocalPosition: {x: -71.5, y: 6.55000019, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 482680}
@@ -696,23 +695,6 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 113990}
   m_Enabled: 1
---- !u!95 &9509034
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 117992}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 752de212899175546871bc9d1f2b9d5c, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!95 &9590422
 Animator:
   serializedVersion: 3
@@ -722,7 +704,7 @@ Animator:
   m_GameObject: {fileID: 116418}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: c7f7099c16dbda647ad845e06cad4d1c, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6a0c1163a3391624c8721f3c89c2c30f, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -741,14 +723,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec2a25d88b82bf44e926366fe249d6fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectile: {fileID: 11415542, guid: 50f5b541fc091dc429fbddaf3098126b, type: 2}
-  movementSpeed: 2
+  projectile: {fileID: 11415542, guid: 48596de48b8eeb94ba630e7ca8bb66e3, type: 2}
+  movementSpeed: 10
   cam: {fileID: 2097408}
   head: {fileID: 442436}
   headBone: {fileID: 404888}
   rotationSpeed: {x: 30, y: 20}
   maxXRotation: 20
   minXRotation: -20
+  animator: {fileID: 9590422}
 --- !u!124 &12424398
 Behaviour:
   m_ObjectHideFlags: 1
@@ -818,13 +801,13 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 1
+  m_Height: 2
   m_Radius: .5
   m_SlopeLimit: 45
   m_StepOffset: .300000012
   m_SkinWidth: .0799999982
   m_MinMoveDistance: .00100000005
-  m_Center: {x: 0, y: .5, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -860,6 +843,23 @@ Prefab:
       propertyPath: m_NormalizedViewPortRect.x
       value: .5
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 6a0c1163a3391624c8721f3c89c2c30f, type: 2}
+    - target: {fileID: 0}
+      propertyPath: movementSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: projectile
+      value: 
+      objectReference: {fileID: 11415542, guid: 48596de48b8eeb94ba630e7ca8bb66e3,
+        type: 2}
+    - target: {fileID: 0}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 9590422}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 172932}
