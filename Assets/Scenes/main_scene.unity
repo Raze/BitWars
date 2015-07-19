@@ -4408,6 +4408,10 @@ Prefab:
       propertyPath: healthLabel
       value: 
       objectReference: {fileID: 391380907}
+    - target: {fileID: 11413856, guid: 8893200c930171f4c85ad30f0bcae7a7, type: 2}
+      propertyPath: enableDebugging
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8893200c930171f4c85ad30f0bcae7a7, type: 2}
   m_IsPrefabParent: 0
