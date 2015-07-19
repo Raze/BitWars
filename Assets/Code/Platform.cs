@@ -44,6 +44,7 @@ public class Platform : MonoBehaviour {
 	public int pointValue = 1;
 	public float hFloatSpeed = 4f;
 	public float vFloatSpeed = 2f;
+
 	public Team ownedBy;
 
 	private Vector3 velocity = Vector3.zero;
@@ -98,9 +99,21 @@ public class Platform : MonoBehaviour {
 	void OnDisable() {
 		allPlatforms.Remove(this);
 	}
-	
+
+	void Start () {
+		setOwner(ownedBy);
+	}
+
 	void Update () {
 		if (floating) updateFloating();
+	}
+
+	void setOwner(Team newOwner) {
+		ownedBy = newOwner;
+		var meshRenderer = gameObject.GetComponentInChildren<MeshRenderer>();
+		meshRenderer.material = (ownedBy == Team.retro)
+			? Constants.instance.retroPlatformMaterial
+			: Constants.instance.modernPlatformMaterial;
 	}
 
 	void updateFloating() {

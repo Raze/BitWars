@@ -8,6 +8,9 @@ public class Constants : MonoBehaviour {
 	public float jumpNodeConnectDistance = 40f;
 	public float floatHeightStep = 10f;
 
+	public Material retroPlatformMaterial;
+	public Material modernPlatformMaterial;
+
 	public static Constants instance = null;
 
 	void OnEnable() {

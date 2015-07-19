@@ -12,6 +12,8 @@ public class RetroCharacter : MonoBehaviour {
 	const float angularSpeed = 180f;
 	const float airborneLinearSpeed = linearSpeed;
 	const float airborneAngularSpeed = angularSpeed;
+	const bool flipMovementAxis = true;
+	const bool flipRotationAxis = true;
 	Vector3 moveDirection = new Vector3(0f, 0f, 1f);
 	Vector3 jumpVelocity = new Vector3(0f, 40f, 0f);
 
@@ -65,8 +67,10 @@ public class RetroCharacter : MonoBehaviour {
 		// Apply velocity.
 		var grounded = characterController.isGrounded;
 		var speed = (grounded ? linearSpeed : airborneLinearSpeed)*Input.GetAxis(movementAxis);
-		transform.Rotate(new Vector3(
-			0f, (grounded ? angularSpeed : airborneAngularSpeed)*Time.deltaTime*Input.GetAxis(rotationAxis), 0f));
+		if (flipMovementAxis) speed *= -1f;
+		var aSpeed = (grounded ? angularSpeed : airborneAngularSpeed);
+		if (flipRotationAxis) aSpeed *= -1f;
+		transform.Rotate(new Vector3(0f, aSpeed*Time.deltaTime*Input.GetAxis(rotationAxis), 0f));
 		if (jumpFunction == null) {
 			var ambientVelocity = character.BaseVelocity + localVelocity;
 			Vector3 motion = transform.TransformVector(
