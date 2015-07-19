@@ -648,7 +648,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf55bb45c792b364a9adb48732ae2990, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enableDebugging: 0
+  enableDebugging: 1
   projectilePrefab: {fileID: 11415542, guid: 48596de48b8eeb94ba630e7ca8bb66e3, type: 2}
   projectileTransform: {fileID: 412000}
 --- !u!114 &11454878
@@ -743,6 +743,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_NormalizedViewPortRect.width
       value: .5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: enableDebugging
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

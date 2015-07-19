@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 [RequireComponent (typeof (Character))]
@@ -8,11 +8,11 @@ public class RetroCharacter : MonoBehaviour {
 	public Projectile projectilePrefab;
 	public Transform projectileTransform;
 
-	const float linearSpeed  = 40f;
-	const float angularSpeed = 270f;
+	const float linearSpeed  = 400f;
+	const float angularSpeed = 180f;
 
-	const float airborneLinearSpeed = 0f;
-	const float airborneAngularSpeed = angularSpeed;
+	const float airborneLinearSpeed = linearSpeed / 4;
+	const float airborneAngularSpeed = angularSpeed / 2;
 
 	string rotationAxis;
 	string movementAxis;
@@ -50,9 +50,9 @@ public class RetroCharacter : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		var speed = (characterController.isGrounded ? airborneLinearSpeed : linearSpeed)
-			* Input.GetAxis(movementAxis);
-		transform.Rotate(new Vector3(0f, (characterController.isGrounded ? airborneAngularSpeed : angularSpeed)
+		var movement = Input.GetAxis(movementAxis);
+		var speed = (characterController.isGrounded ? linearSpeed : airborneLinearSpeed) * movement;
+		transform.Rotate(new Vector3(0f, (characterController.isGrounded ? angularSpeed : airborneAngularSpeed)
 			* Time.deltaTime * Input.GetAxis(rotationAxis), 0f));
 
 		if(jumpFunction != null) {
@@ -63,7 +63,7 @@ public class RetroCharacter : MonoBehaviour {
 			}
 		} else {
 			characterController.SimpleMove(transform.TransformVector(
-					character.BaseVelocity + moveDirection*speed));
+					(character.BaseVelocity + moveDirection*speed)*Time.deltaTime));
 			GetComponent<Animator>().SetFloat("Speed",
 				characterController.isGrounded ? Mathf.Abs(speed) : 0f);
 		}
