@@ -17,7 +17,7 @@ public class RetroCharacter : MonoBehaviour {
 	string rotationAxis;
 	string movementAxis;
 	KeyCode shootButton;
-	Vector3 moveDirection = new Vector3(0f, 0f, -1f);
+	Vector3 moveDirection = new Vector3(0f, 0f, 1f);
 	CharacterController characterController;
 	Character character;
 	JumpNode.JumpFunction jumpFunction;
@@ -78,7 +78,7 @@ public class RetroCharacter : MonoBehaviour {
 		string[] names = Input.GetJoystickNames();
 		int j;
 		for (j=0; j<names.Length; ++j) {
-			if (! names[j].Contains("SPEED-LINK")) break;
+			if (names[j].Contains("SPEED-LINK")) continue;
 		}
 		if (j >= names.Length) j = 0;
 		Debug.Log("Using joystick " + (j+1).ToString() + ", \"" + names[j] + "\", for Retro character.");
