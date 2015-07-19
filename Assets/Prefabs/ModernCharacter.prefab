@@ -325,6 +325,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &188184
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 468848}
+  m_Layer: 0
+  m_Name: Shoot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &191616
 GameObject:
   m_ObjectHideFlags: 1
@@ -349,7 +364,8 @@ Transform:
   m_LocalRotation: {x: 1.24621351e-06, y: 1.37135359e-07, z: .0136735048, w: .99990654}
   m_LocalPosition: {x: -.160744935, y: 1.45339968e-07, z: 4.84466547e-08}
   m_LocalScale: {x: .999999702, y: 1, z: .99999994}
-  m_Children: []
+  m_Children:
+  - {fileID: 468848}
   m_Father: {fileID: 499802}
   m_RootOrder: 0
 --- !u!4 &404888
@@ -496,6 +512,18 @@ Transform:
   - {fileID: 404888}
   m_Father: {fileID: 454464}
   m_RootOrder: 1
+--- !u!4 &468848
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 188184}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -.312000006, y: -.00800000038, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 403274}
+  m_RootOrder: 0
 --- !u!4 &469356
 Transform:
   m_ObjectHideFlags: 1
@@ -555,8 +583,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 113990}
-  m_LocalRotation: {x: .155669376, y: .00740128942, z: -.00117531838, w: .987780869}
-  m_LocalPosition: {x: -.194344565, y: 3.28295946, z: -8.94193649}
+  m_LocalRotation: {x: .0960683897, y: .0435634442, z: -.00421872968, w: .994412065}
+  m_LocalPosition: {x: -.346892416, y: 1.77369881, z: -3.95171428}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 456502}
@@ -729,7 +757,8 @@ MonoBehaviour:
   cam: {fileID: 2097408}
   head: {fileID: 442436}
   headBone: {fileID: 404888}
-  rotationSpeed: {x: 30, y: 20}
+  shootPosition: {fileID: 468848}
+  rotationSpeed: {x: 50, y: 30}
   maxXRotation: 20
   minXRotation: -20
   animator: {fileID: 9590422}

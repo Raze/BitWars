@@ -69,6 +69,9 @@ public class ModernCharacter : MonoBehaviour {
 	[SerializeField]
 	Transform headBone;
 
+	[SerializeField]
+	Transform shootPosition;
+
 	Vector3 targetRotationAngle = Vector3.zero;
 
 	[SerializeField]
@@ -128,7 +131,7 @@ public class ModernCharacter : MonoBehaviour {
 		animator.SetFloat( "Speed", velocity.magnitude );
 
 		if( controller.a.down ) {
-			ProjectileSystem.ShootProjectile( projectile, transform.position, transform.forward, characterController );
+			ProjectileSystem.ShootProjectile( projectile, shootPosition.position, transform.forward, characterController );
 		}
 	}
 

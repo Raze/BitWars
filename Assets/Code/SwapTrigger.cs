@@ -26,7 +26,7 @@ public class SwapTrigger : MonoBehaviour {
 			break;
 		}
 		if( swap ) {
-			Platform.swap( capture.platform, swapWith );
+			Platform.swap( swapWith, capture.platform );
 			capture.Lock();
 		}
 	}

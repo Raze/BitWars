@@ -108,6 +108,9 @@ public class Character : MonoBehaviour {
 		while (obj != null) {
 			var platform = obj.GetComponent<Platform>();
 			if (platform != null) return platform;
+			if( obj.transform.parent == null ) {
+				break;
+			}
 			obj = obj.transform.parent.gameObject;
 		}
 
