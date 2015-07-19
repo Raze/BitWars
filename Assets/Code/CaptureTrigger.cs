@@ -11,12 +11,20 @@ public class CaptureTrigger : MonoBehaviour {
 	public Platform platform;
 
 	[SerializeField]
+	UnityEngine.UI.Text label;
+
+	[SerializeField]
 	SwapTrigger[] swapTriggers;
 
 	ModernCharacter modern;
 	RetroCharacter retro;
 
+
 	bool unlocked = false;
+
+	void Start() {
+		Lock();
+	}
 
 	void OnTriggerEnter( Collider other ) {
 		var modern = other.GetComponent<ModernCharacter>();
@@ -48,11 +56,11 @@ public class CaptureTrigger : MonoBehaviour {
 			switch( platform.ownedBy ) {
 			case Team.modern:
 				isInside = retro != null;
-				isAlone = modern != null;
+				isAlone = modern == null;
 				break;
 			case Team.retro:
 				isInside = modern != null;
-				isAlone = retro != null;
+				isAlone = retro == null;
 				break;
 			}
 		}
@@ -66,6 +74,12 @@ public class CaptureTrigger : MonoBehaviour {
 			}
 		} else {
 			currentTime = 0f;
+		}
+
+		if( unlocked ) {
+			label.text = "Capture!";
+		} else {
+			label.text = "Capture: " + Mathf.Max(0f, (captureTime - currentTime )).ToString();
 		}
 	}
 

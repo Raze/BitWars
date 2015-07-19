@@ -13,10 +13,10 @@ public class SwapTrigger : MonoBehaviour {
 		bool swap = false;
 		switch( capture.platform.ownedBy ) {
 		case Team.modern:
-			swap = other.GetComponent<ModernCharacter>();
+			swap = other.GetComponent<RetroCharacter>() != null;
 			break;
 		case Team.retro:
-			swap = other.GetComponent<RetroCharacter>();
+			swap = other.GetComponent<ModernCharacter>() != null;
 			break;
 		}
 		if( swap ) {

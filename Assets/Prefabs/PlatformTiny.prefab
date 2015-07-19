@@ -1994,6 +1994,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   captureTime: 10
   platform: {fileID: 11434418}
+  label: {fileID: 11409944}
   swapTriggers:
   - {fileID: 11457920}
   - {fileID: 11435208}
