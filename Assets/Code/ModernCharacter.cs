@@ -88,13 +88,22 @@ public class ModernCharacter : MonoBehaviour {
 
 	CharacterController characterController;
 
+	Character character;
+
 	void OnEnable() {
 		characterController = GetComponent<CharacterController>();
+		character = GetComponent<Character>();
+		character.onDeath += onDeath;
 		var pos = head.localPosition;
 		var rot = head.localRotation;
 		head.parent = headBone;
 		head.localPosition = pos;
 		head.localRotation = rot;
+	}
+
+	void onDeath() {
+		jumpFunction = null;
+		ignoreJumpNode = null;
 	}
 
 	void OnTriggerEnter( Collider other ) {
@@ -113,15 +122,7 @@ public class ModernCharacter : MonoBehaviour {
 	}
 
 	void GroundUpdate() {
-		controller.SetCurrentState( GamePad.GetState( PlayerIndex.One ) );
-
 		var velocity = new Vector3(controller.leftStick.x, 0f, controller.leftStick.y) * movementSpeed;
-
-		targetRotationAngle.x += controller.rightStick.y * rotationSpeed.y * Time.deltaTime;
-		targetRotationAngle.y += controller.rightStick.x * rotationSpeed.x * Time.deltaTime;
-		targetRotationAngle.x = Mathf.Clamp( targetRotationAngle.x, minXRotation, maxXRotation );
-
-		transform.rotation = Quaternion.Euler( targetRotationAngle );
 
 		characterController.SimpleMove((Quaternion.Euler(new Vector3(0f, targetRotationAngle.y, 0f)) * velocity));
 		animator.SetFloat( "Speed", velocity.magnitude );
@@ -139,7 +140,19 @@ public class ModernCharacter : MonoBehaviour {
 		}
 	}
 
+	void UpdateAim() {
+		targetRotationAngle.x += controller.rightStick.y * rotationSpeed.y * Time.deltaTime;
+		targetRotationAngle.y += controller.rightStick.x * rotationSpeed.x * Time.deltaTime;
+		targetRotationAngle.x = Mathf.Clamp( targetRotationAngle.x, minXRotation, maxXRotation );
+
+		transform.rotation = Quaternion.Euler( targetRotationAngle );
+	}
+
 	void Update() {
+		controller.SetCurrentState( GamePad.GetState( PlayerIndex.One ) );
+
+		UpdateAim();
+
 		if( jumpFunction != null ) {
 			UpdateJump();
 		} else {

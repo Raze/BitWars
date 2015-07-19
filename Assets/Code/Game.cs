@@ -20,10 +20,11 @@ public class Game : MonoBehaviour {
 	}
 
 	void Awake() {
+		instance = this;
 		Platform.swapFinished += ( a, b ) => {
 			var t = a.ownedBy;
-			a.ownedBy = b.ownedBy;
-			b.ownedBy = t;
+			a.setOwner(b.ownedBy);
+			b.setOwner(t);
 		};
 	}
 
@@ -31,6 +32,30 @@ public class Game : MonoBehaviour {
 		CalculateScore();
 		retroScoreLabel.text = "Score: " + retroScore;
 		modernScoreLabel.text = "Score: " + modernScore;
+	}
+
+	public void respawn( Character character ) {
+		character.gameObject.SetActive( false );
+		StartCoroutine( respawnCharacter( character ) );
+	}
+
+	IEnumerator respawnCharacter( Character character ) {
+		float wait = character.respawnTime;
+		var label = character.respawnLabel;
+		if( label != null ) {
+			label.gameObject.SetActive( true );
+		}
+		for(float t = 0f; t <= wait; t += Time.deltaTime) {
+			if( label != null ) {
+				label.text = "Respawn in {0}".Fmt((wait - t).ToString("0.0"));
+			}
+			yield return null;
+		}
+		if( label != null ) {
+			label.gameObject.SetActive( false );
+		}
+		character.gameObject.SetActive( true );
+		character.respawn();
 	}
 
 	void CalculateScore() {
